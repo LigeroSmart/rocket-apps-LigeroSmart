@@ -46,7 +46,9 @@ export default class LigeroSmart {
             return undefined;
         }
 
-        return JSON.parse(response.content)['Ticket'][0]['TicketNumber'];
+        const responseTID = JSON.parse(response.content);
+
+        return responseTID['Tickets'][0];
 
     }
 
@@ -88,14 +90,14 @@ export default class LigeroSmart {
             return undefined;
         }
         const responseTNData = JSON.parse(responseTN.content);
-console.log('AAAAAAAAAAAAAAAAAAAAAA');
+
         if (!responseTNData['Ticket'][0]['TicketNumber']){
             logger.error('Error calling LigeroSmart: Could not retrive ticket number');
             return undefined;
         }
-        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBB');
+
         const TicketNumber = responseTNData['Ticket'][0]['TicketNumber'];
-        console.log('CCCCCCCCCCCCCCCCCCCCCCC');
+
         return TicketNumber;
     }
 }
