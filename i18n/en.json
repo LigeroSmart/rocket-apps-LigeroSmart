@@ -1,0 +1,7 @@
+{
+    "ligerosmart_hi":"Welcome message for the chat",
+    "ligerosmart_hi_desc": "Leave it blank if you don't this app send a welcome message",
+    "ligerosmart_bye": "Message to be sent when chat is closed" ,
+    "ligerosmart_new_ticket": "Message to be send when ticket is create",
+    "ligerosmart_url": "Server URL"
+}

@@ -1,0 +1,263 @@
+{
+    "_id": "eJpGTW2zPFt2Ahgux",
+    "label": "Nome Usuário",
+    "createdAt": "2021-04-09T12:52:23.563Z",
+    "lastMessageAt": "2021-04-09T13:19:39.216Z",
+    "tags": [],
+    "visitor": {
+        "_id": "HwpCPovtp2vtdaRsD",
+        "token": "xxxxxxxxxxxxxxxx",
+        "name": "Nome Usuário",
+        "username": "guest-36",
+        "email": [
+            {
+                "address": "email@dousuario.com"
+            }
+        ],
+        "phone": [
+            {
+                "phoneNumber": "9999999999"
+            }
+        ],
+        "department": "xxxxxxxxxx"
+    },
+    "agent": {
+        "_id": "YaTALLRDT7r74gvQA",
+        "username": "xxxxxxx",
+        "name": "Nome do Agente",
+        "email": "email@doagente.com.br"
+    },
+    "type": "LivechatSession",
+    "messages": [
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "SzqjpAvRsejvwydvi",
+            "username": "guest-36",
+            "msg": "Bom dia",
+            "ts": "2021-04-09T12:52:23.935Z"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "F7yw2ZeSvJ7aDexLK",
+            "username": "guest-36",
+            "msg": "Olá, este atendimento gerou um número de chamado:\n2021040965002261\n\nVocê será atendido em até 2 minutos.\n",
+            "ts": "2021-04-09T12:52:24.541Z"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "9A7ojTFmiaANCakSq",
+            "username": "guest-36",
+            "msg": "Bla bla bla",
+            "ts": "2021-04-09T12:53:04.805Z"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "BAxLgGgrghDNJZyqP",
+            "username": "atendentex",
+            "msg": "Bom dia, VisitanteName",
+            "ts": "2021-04-09T13:00:50.214Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "SFmfTrAg7Af7PNwqe",
+            "username": "guest-36",
+            "msg": "Bom diaaaa AtendenteName",
+            "ts": "2021-04-09T13:01:02.637Z"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "3twoiZMMyMZNGx2Ny",
+            "username": "atendentex",
+            "msg": "tudo bem?",
+            "ts": "2021-04-09T13:01:12.987Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "P6j2Diro96CG9ZHJc",
+            "username": "atendentex",
+            "msg": "nenhum dos processos estão aparecendo para você?",
+            "ts": "2021-04-09T13:01:16.389Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "EX6zTve8etdKkiC45",
+            "username": "guest-36",
+            "msg": "tudo sim e com vc?",
+            "ts": "2021-04-09T13:01:21.224Z"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "MwoX8ELvLFqaNEzht",
+            "username": "guest-36",
+            "msg": "estão sim, apenas não aparece os do Fulano",
+            "ts": "2021-04-09T13:01:39.982Z"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "yDHEnMDC3bcDRbDuR",
+            "username": "guest-36",
+            "msg": "no ícone central de tarefas, não aparece mais ele",
+            "ts": "2021-04-09T13:02:07.725Z"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "XoJzahwhCjZQWcBAy",
+            "username": "atendentex",
+            "msg": "Certo, neste caso, irei encaminhar a solicitação para nossos especialistas verificarem",
+            "ts": "2021-04-09T13:04:13.957Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "3uuRdQSf4pRwL7NAz",
+            "username": "atendentex",
+            "msg": "e após esta análise, notificamos a senhora por e-mail, ok?",
+            "ts": "2021-04-09T13:04:28.692Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "ZpTeFJCjDBttBSDnZ",
+            "username": "guest-36",
+            "msg": "ok. ",
+            "ts": "2021-04-09T13:04:35.166Z"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "WDghYfhybiySywvWS",
+            "username": "guest-36",
+            "msg": "obrigada",
+            "ts": "2021-04-09T13:04:42.682Z"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "8KS9eiBZBJmNGQEav",
+            "username": "atendentex",
+            "msg": "Imagina, além disso, ajudo em algo mais?",
+            "ts": "2021-04-09T13:05:42.976Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "eu5KmtPqi6Wbyfmwn",
+            "username": "guest-36",
+            "msg": "obrigada",
+            "ts": "2021-04-09T13:18:57.919Z"
+        },
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Nome Visitante"
+            },
+            "_id": "AgRCyfHRMdz4xboaR",
+            "username": "guest-36",
+            "msg": " bjs",
+            "ts": "2021-04-09T13:18:58.901Z"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "86ryX9bRZZSHhvW9D",
+            "username": "atendentex",
+            "msg": "Imagina. Tenha um bom dia, ficamos á disposição.",
+            "ts": "2021-04-09T13:19:39.216Z",
+            "agentId": "YaTALLRDT7r74gvQA"
+        },
+        {
+            "u": {
+                "_id": "YaTALLRDT7r74gvQA",
+                "username": "atendentex",
+                "name": "Nome do Agente"
+            },
+            "_id": "SXwRJMfjfWb6EY8WS",
+            "username": "atendentex",
+            "msg": "Fluig - corretiva",
+            "ts": "2021-04-09T13:19:51.593Z",
+            "agentId": "YaTALLRDT7r74gvQA",
+            "closingMessage": true
+        }
+    ],
+    "departmentId": "6zbnrfeJPT8qjo4TX",
+    "servedBy": {
+        "_id": "YaTALLRDT7r74gvQA",
+        "username": "atendentex",
+        "ts": "2021-04-09T13:00:27.926Z"
+    },
+    "closedAt": "2021-04-09T13:19:51.584Z",
+    "closedBy": {
+        "_id": "YaTALLRDT7r74gvQA",
+        "username": "atendentex"
+    },
+    "closer": "user"
+}

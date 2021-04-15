@@ -1,0 +1,43 @@
+{
+    "_id": "eJpGTW2zPFt2Ahgux",
+    "label": "Visitante Name",
+    "createdAt": "2021-04-09T12:52:23.563Z",
+    "lastMessageAt": "2021-04-09T13:05:42.976Z",
+    "visitor": {
+        "_id": "HwpCPovtp2vtdaRsD",
+        "token": "ngvyoltpm9od46ptoa5aca",
+        "name": "Visitante Name",
+        "username": "guest-36",
+        "email": [
+            {
+                "address": "AZName@organization.ORG.BR"
+            }
+        ],
+        "phone": [
+            {
+                "phoneNumber": "xxxxxxxxx"
+            }
+        ],
+        "department": "6zbnrfeJPT8qjo4TX"
+    },
+    "agent": {
+        "_id": "YaTALLRDT7r74gvQA",
+        "username": "agentuser",
+        "name": "Agent Name Sample",
+        "email": "agentuser@organization.org.br"
+    },
+    "type": "Message",
+    "messages": [
+        {
+            "u": {
+                "_id": "HwpCPovtp2vtdaRsD",
+                "username": "guest-36",
+                "name": "Visitante Name"
+            },
+            "_id": "eu5KmtPqi6Wbyfmwn",
+            "username": "guest-36",
+            "msg": "obrigada",
+            "ts": "2021-04-09T13:18:57.919Z"
+        }
+    ]
+}
