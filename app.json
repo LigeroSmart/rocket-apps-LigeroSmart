@@ -13,6 +13,7 @@
     "classFile": "LigeroSmartApp.ts",
     "description": "LigeroSmart Integration with Rocket.Chat",
     "implements": [
-        "IPostMessageSent"
+        "IPostMessageSent",
+        "IPostLivechatRoomClosed"
     ]
 }
