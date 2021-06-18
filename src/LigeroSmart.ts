@@ -47,12 +47,14 @@ export default class LigeroSmart {
 
             if (message.attachments) {
                 const serverUrl = await read.getEnvironmentReader().getServerSettings().getValueById('Site_Url');
-                const AttachUrl = serverUrl + message.attachments[0]!.title!.link!;
-                messageAsObj['fileUpload'] = {
-                    publicFilePath: AttachUrl
-                };
-
                 let FileType = 'application/octet-stream';
+
+                const AttachUrl =
+                    message.attachments[0].imageUrl ||
+                    message.attachments[0].audioUrl ||
+                    message.attachments[0].videoUrl ||
+                    `${serverUrl+message.attachments[0]!.title!.link!}`;
+
                 if (message.attachments[0].title?.value?.match(/.png$/gi) ) {
                     FileType = 'image/png';
                 } else if (message.attachments[0].title?.value?.match(/\.(jpg|jpeg)$/gi) ) {
@@ -75,7 +77,11 @@ export default class LigeroSmart {
                     type: FileType,
                     name: message.attachments[0].title?.value,
                 };
-                // TODO: check if two way works or treat imageUrl, audioUrl and videoUrl separetely
+
+                messageAsObj['fileUpload'] = {
+                    publicFilePath: AttachUrl
+                };
+
             }
 
             console.debug(messageAsObj);
@@ -144,6 +150,13 @@ export default class LigeroSmart {
         data = {
             ...data,
             visitor: liveVisitor || {},
+        }
+
+        if (data.visitor.visitorEmails[0].address){
+            data.visitor = {
+                ...data.visitor,
+                email: data.visitor.visitorEmails[0].address
+            }
         }
 
         return data;
