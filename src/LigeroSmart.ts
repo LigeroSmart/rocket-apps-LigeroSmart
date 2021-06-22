@@ -11,15 +11,27 @@ export default class LigeroSmart {
                             read: IRead,
                             persistence: IPersistence,
                             room: ILivechatRoom,
-                            message?: ILivechatMessage
+                            message?: ILivechatMessage,
+                            logger?: ILogger
                         )
     {
+        if(logger){
+            // logger.debug('PD: 1')
+        }
+
         let data: any = undefined;
         let roomMessages: any;
         const lcRoom = room as ILivechatRoom;
+        if(logger){
+            // logger.debug('PD: 2')
+        }
+
         const roomPersisAss = new RocketChatAssociationRecord(
             RocketChatAssociationModel.ROOM, lcRoom.id
         );
+        if(logger){
+            // logger.debug('PD: 3')
+        }
 
         if(eventType === 'Message' && message){
             if (!lcRoom.visitor) {
@@ -44,16 +56,23 @@ export default class LigeroSmart {
             {
                     messageAsObj['agentId']  = message.sender.username;
             }
+            if(logger){
+                // logger.debug('PD: 4')
+            }
 
             if (message.attachments) {
                 const serverUrl = await read.getEnvironmentReader().getServerSettings().getValueById('Site_Url');
                 let FileType = 'application/octet-stream';
 
-                const AttachUrl =
+                let AttachUrl =
                     message.attachments[0].imageUrl ||
                     message.attachments[0].audioUrl ||
                     message.attachments[0].videoUrl ||
-                    `${serverUrl+message.attachments[0]!.title!.link!}`;
+                    message.attachments[0]!.title!.link!;
+
+                if (AttachUrl.indexOf('http')!=0){
+                    AttachUrl = `${serverUrl+AttachUrl}`;
+                }
 
                 if (message.attachments[0].title?.value?.match(/.png$/gi) ) {
                     FileType = 'image/png';
@@ -84,11 +103,17 @@ export default class LigeroSmart {
 
             }
 
-            console.debug(messageAsObj);
+            // console.debug(messageAsObj);
+            if(logger){
+                // logger.debug('PD: 5')
+            }
 
             roomMessages = await read.getPersistenceReader().readByAssociation(roomPersisAss);
 
-            console.debug(roomMessages);
+            // console.debug(roomMessages);
+            if(logger){
+                // logger.debug('PD: 6')
+            }
 
             let newMessage = {};
             if (!roomMessages || !roomMessages[0] || !roomMessages[0]['Messages']){
@@ -106,28 +131,53 @@ export default class LigeroSmart {
                     ]
                 };
             }
+            if(logger){
+                // logger.debug('PD: 7')
+            }
+
             const roomPersis = persistence.updateByAssociation(
                 roomPersisAss,
                 newMessage,
                 true,
             );
         }
+        if(logger){
+            // logger.debug('PD: 8')
+        }
 
         // Get messages
         let roomMessagesArray: Array<any> = [];
         roomMessages = await read.getPersistenceReader().readByAssociation(roomPersisAss);
+        if(logger){
+            // logger.debug('PD: 9')
+        }
 
         if (roomMessages && roomMessages[0] && roomMessages[0]['Messages']){
             roomMessagesArray = roomMessages[0]['Messages'];
-            console.debug(roomMessagesArray);
+            // console.debug(roomMessagesArray);
         }
+        if(logger){
+            // logger.debug('PD: 10')
+        }
+
         data = {
             _id: lcRoom.id,
             type: eventType,
             messages: roomMessagesArray,
         }
+        if(logger){
+            // logger.debug('PD: 10.1')
+        }
 
         const servedBy = lcRoom.servedBy;
+        if(logger){
+            // logger.debug('PD: 10.2')
+        }
+
+        let mailAddress='';
+        if(servedBy && servedBy.emails && servedBy.emails[0] && servedBy.emails[0].address){
+            mailAddress = servedBy.emails[0].address || '';
+        }
         if (servedBy) {
             data = {
                 ...data,
@@ -135,9 +185,12 @@ export default class LigeroSmart {
                             _id: servedBy.id || '',
                         name: servedBy.name || '',
                     username: servedBy.username || '',
-                        email: servedBy.emails[0].address || '',
+                        email: mailAddress,
                 }
             }
+        }
+        if(logger){
+            // logger.debug('PD: 11')
         }
 
         const liveVisitor = lcRoom.visitor;
@@ -151,6 +204,9 @@ export default class LigeroSmart {
             ...data,
             visitor: liveVisitor || {},
         }
+        if(logger){
+            // logger.debug('PD: 12')
+        }
 
         if (data.visitor.visitorEmails[0].address){
             data.visitor = {
@@ -162,7 +218,7 @@ export default class LigeroSmart {
         return data;
     }
 
-    public static async TicketCleateOrClose(http: IHttp,
+    public static async TicketCreateOrClose(http: IHttp,
                                             read: IRead,
                                             logger: ILogger,
                                             data: any): Promise<string|undefined>
@@ -190,21 +246,25 @@ export default class LigeroSmart {
                 'Content-Type': 'application/json'
             }
         })
-        if (response.statusCode !== 200
+        if (!response || !response.statusCode || response.statusCode !== 200
             || (response.content && JSON.parse(response.content)['Error'])
             ){
             logger.error('Error calling LigeroSmart: ' + response.content);
             return undefined;
         }
 
-        if(!response.content){
+        if(!response || !response.content){
             logger.error('Error calling LigeroSmart: got NO return from LigeroSmart');
             return undefined;
         }
 
         const responseTID = JSON.parse(response.content);
+        if (responseTID && responseTID['Tickets'] && responseTID['Tickets'][0]){
+            return responseTID['Tickets'][0];
+        } else {
+            return undefined;
+        }
 
-        return responseTID['Tickets'][0];
 
     }
 
@@ -234,7 +294,7 @@ export default class LigeroSmart {
             }
         })
 
-        if (responseTN.statusCode !== 200
+        if (!responseTN || !responseTN.statusCode || responseTN.statusCode !== 200
             || (responseTN.content && (JSON.parse(responseTN.content)['Error']))
             ){
             logger.error('Error calling LigeroSmart: ' + responseTN.content);

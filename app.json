@@ -1,6 +1,6 @@
 {
     "id": "f6f5c6cd-c040-4235-ad3c-c732a65fbc93",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "requiredApiVersion": "^1.19.0",
     "iconFile": "icon.png",
     "author": {
@@ -11,7 +11,7 @@
     "name": "LigeroSmart",
     "nameSlug": "ligerosmart",
     "classFile": "LigeroSmartApp.ts",
-    "description": "LigeroSmart Integration with Rocket.Chat",
+    "description": "LigeroSmart Integration with Rocket.Chat allows you to create tickets for each chat conversation and send the number back to the visitor.",
     "implements": [
         "IPostMessageSent",
         "IPostLivechatRoomClosed"
