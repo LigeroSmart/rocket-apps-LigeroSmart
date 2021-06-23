@@ -6,6 +6,7 @@ export enum AppSetting {
     ligerosmartNewTicket = 'ligerosmart_new_ticket',
     ligerosmartUserLogin = 'ligerosmart_user_login',
     ligerosmartUserPassword = 'ligerosmart_user_password',
+    ligerosmartTelegramBot = 'ligerosmart_telegram_bot',
 }
 
 export enum DefaultMessage {
@@ -57,5 +58,14 @@ export const settings: Array<ISetting> = [
         packageValue: DefaultMessage.DEFAULT_LigeroSmartUserPassword,
         i18nLabel: 'ligerosmart_user_password',
         required: true,
+    },
+    {
+        id: AppSetting.ligerosmartTelegramBot,
+        public: true,
+        type: SettingType.STRING,
+        packageValue: undefined,
+        i18nLabel: 'ligerosmart_bot_label',
+        i18nDescription: 'ligerosmart_bot_desc',
+        required: false,
     },
 ];

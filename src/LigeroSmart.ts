@@ -208,7 +208,10 @@ export default class LigeroSmart {
             // logger.debug('PD: 12')
         }
 
-        if (data.visitor.visitorEmails[0].address){
+        if (data.visitor &&
+            data.visitor.visitorEmails &&
+            data.visitor.visitorEmails[0] &&
+            data.visitor.visitorEmails[0].address){
             data.visitor = {
                 ...data.visitor,
                 email: data.visitor.visitorEmails[0].address
@@ -316,4 +319,22 @@ export default class LigeroSmart {
 
         return TicketNumber;
     }
+
+    public static async SendTelegramMessage(http: IHttp, text: String, token: String, telegramChannel): Promise<void> {
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+        const { data } = await http.post(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            content: JSON.stringify({
+                chat_id: telegramChannel.session_id,
+                text,
+            })
+        });
+        const { ok } = data;
+        if (!ok) {
+            throw new Error(`LigeroSmart could not send message through Telegram channel ${JSON.stringify(data)}`);
+        }
+    };
 }

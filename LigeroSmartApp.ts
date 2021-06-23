@@ -69,10 +69,15 @@ export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivech
         this.getLogger().debug('m: 8 - TN='+TicketNumber);
 
         // SEND HI AND TICKET NUMBER #####################################################
+        // @TODO CHECK WHY THIS MESSAGES ARE NOT SENT TO TELEGRAM CHANNEL. THEY ARE CREATED BUT NOT SEND.
         if(!message.room.customFields || !message.room.customFields.LigeroSmartFirstMessage){
             const appUser = await read.getUserReader().getAppUser(this.getID());
             const roomUp = await modify.getExtender().extendRoom(message.room.id,{} as IUser);
             roomUp.addCustomField('LigeroSmartFirstMessage', '1');
+
+            // Check if Telegram is enabled
+            const telegramToken = await (await read.getEnvironmentReader().getSettings().getById('ligerosmart_telegram_bot')).value;
+
             await modify.getExtender().finish(roomUp);
 
             const hiMessageText =
@@ -81,6 +86,10 @@ export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivech
                 const hiMessage = modify.getCreator().startLivechatMessage();
                 hiMessage.setText(hiMessageText).setRoom(message.room).setSender(appUser!);
                 await modify.getCreator().finish(hiMessage);
+
+                if(telegramToken && message.room.customFields && message.room.customFields.telegramChannel){
+                    await LigeroSmart.SendTelegramMessage(http, hiMessageText, telegramToken, message.room.customFields.telegramChannel);
+                }
             }
 
             let ticketMessageText:String =
@@ -90,6 +99,10 @@ export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivech
                 const ticketMessage = modify.getCreator().startLivechatMessage();
                 ticketMessage.setText(ticketMessageText.toString()).setRoom(message.room).setSender(appUser!);
                 await modify.getCreator().finish(ticketMessage);
+
+                if(telegramToken && message.room.customFields && message.room.customFields.telegramChannel){
+                    await LigeroSmart.SendTelegramMessage(http, ticketMessageText, telegramToken, message.room.customFields.telegramChannel);
+                }
             }
         }
     }
