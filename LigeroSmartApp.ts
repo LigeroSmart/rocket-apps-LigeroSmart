@@ -66,7 +66,7 @@ export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivech
             this.getLogger(),
             TicketID,
         ) || '';
-        this.getLogger().debug('m: 8 - TN='+TicketNumber);
+        // this.getLogger().debug('m: 8 - TN='+TicketNumber);
 
         // SEND HI AND TICKET NUMBER #####################################################
         // @TODO CHECK WHY THIS MESSAGES ARE NOT SENT TO TELEGRAM CHANNEL. THEY ARE CREATED BUT NOT SEND.
