@@ -1,5 +1,5 @@
 import { IHttp, ILogger, IPersistence, IRead } from "@rocket.chat/apps-engine/definition/accessors";
-import { ILivechatMessage, ILivechatRoom } from "@rocket.chat/apps-engine/definition/livechat";
+import { IDepartment, ILivechatMessage, ILivechatRoom } from "@rocket.chat/apps-engine/definition/livechat";
 import { RocketChatAssociationModel, RocketChatAssociationRecord } from "@rocket.chat/apps-engine/definition/metadata";
 import { UserType } from "@rocket.chat/apps-engine/definition/users";
 import { apiUriRocket, apiUriTicketGet } from "./constants";
@@ -22,6 +22,9 @@ export default class LigeroSmart {
         let data: any = undefined;
         let roomMessages: any;
         const lcRoom = room as ILivechatRoom;
+        // Workaroung to get TAGs
+        const fullRoomInfo = JSON.parse(JSON.stringify(lcRoom));
+
         if(logger){
             // logger.debug('PD: 2')
         }
@@ -45,10 +48,19 @@ export default class LigeroSmart {
             messageAsObj['ts']  = message.updatedAt;
             messageAsObj['username'] = message.sender.username;
             messageAsObj['userType'] = message.sender.type;
+            if (message.sender.emails
+                && message.sender.emails[0]
+                && message.sender.emails[0].address){
+                    messageAsObj['email'] = message.sender.emails[0].address;
+                } else {
+                    messageAsObj['email'] = '';
+                }
+
             messageAsObj['u'] = {
                         _id:  message.sender.id,
                         username: message.sender.username,
                         name: message.sender.name,
+                        email: messageAsObj['email'],
             }
             if (message.sender.type === UserType.USER
                 || message.sender.type === UserType.BOT
@@ -164,6 +176,7 @@ export default class LigeroSmart {
             _id: lcRoom.id,
             type: eventType,
             messages: roomMessagesArray,
+            tags: fullRoomInfo._unmappedProperties_?.tags || undefined,
         }
         if(logger){
             // logger.debug('PD: 10.1')
@@ -203,6 +216,7 @@ export default class LigeroSmart {
         data = {
             ...data,
             visitor: liveVisitor || {},
+            departmentName: lcRoom.department?.name
         }
         if(logger){
             // logger.debug('PD: 12')

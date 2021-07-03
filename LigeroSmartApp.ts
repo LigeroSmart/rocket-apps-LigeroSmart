@@ -69,7 +69,6 @@ export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivech
         // this.getLogger().debug('m: 8 - TN='+TicketNumber);
 
         // SEND HI AND TICKET NUMBER #####################################################
-        // @TODO CHECK WHY THIS MESSAGES ARE NOT SENT TO TELEGRAM CHANNEL. THEY ARE CREATED BUT NOT SEND.
         if(!message.room.customFields || !message.room.customFields.LigeroSmartFirstMessage){
             const appUser = await read.getUserReader().getAppUser(this.getID());
             const roomUp = await modify.getExtender().extendRoom(message.room.id,{} as IUser);
