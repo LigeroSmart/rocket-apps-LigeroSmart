@@ -1,7 +1,7 @@
 {
     "id": "f6f5c6cd-c040-4235-ad3c-c732a65fbc93",
-    "version": "1.0.0",
-    "requiredApiVersion": "^1.19.0",
+    "version": "1.0.1",
+    "requiredApiVersion": "^1.27.1",
     "iconFile": "icon.png",
     "author": {
         "name": "LigeroSmart",

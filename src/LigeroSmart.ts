@@ -2,10 +2,9 @@ import { IHttp, ILogger, IPersistence, IRead } from "@rocket.chat/apps-engine/de
 import { IDepartment, ILivechatMessage, ILivechatRoom } from "@rocket.chat/apps-engine/definition/livechat";
 import { RocketChatAssociationModel, RocketChatAssociationRecord } from "@rocket.chat/apps-engine/definition/metadata";
 import { UserType } from "@rocket.chat/apps-engine/definition/users";
-import { apiUriRocket, apiUriTicketGet } from "./constants";
+import { apiUriRocket, apiUriTicketGet, apiLigeroSmartTimeout } from "./constants";
 
 export default class LigeroSmart {
-
     public static async ProcessData (
                             eventType: string,
                             read: IRead,
@@ -15,6 +14,7 @@ export default class LigeroSmart {
                             logger?: ILogger
                         )
     {
+
         if(logger){
             // logger.debug('PD: 1')
         }
@@ -259,6 +259,7 @@ export default class LigeroSmart {
 
         const response = await http.post(apiUrlRocket,{
             content: JSON.stringify(data,null,2),
+            timeout: apiLigeroSmartTimeout,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -287,6 +288,7 @@ export default class LigeroSmart {
 
     public static async TicketNumberGet(http: IHttp, read: IRead, logger: ILogger, TicketID: string): Promise<string|undefined>
     {
+
         const ligerosmartServerUrl: string =
             await read.getEnvironmentReader().getSettings().getValueById('ligerosmart_url');
 
@@ -306,6 +308,7 @@ export default class LigeroSmart {
 
         const responseTN = await http.post(apiUrlTicketGet,{
             content: JSON.stringify(ticketGetData,null,2),
+            timeout: apiLigeroSmartTimeout,
             headers: {
                 'Content-Type': 'application/json'
             }
