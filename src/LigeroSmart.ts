@@ -242,6 +242,8 @@ export default class LigeroSmart {
     {
         const ligerosmartServerUrl: string =
             await read.getEnvironmentReader().getSettings().getValueById('ligerosmart_url');
+        const ligerosmartServerWebserviceName: string =
+            await read.getEnvironmentReader().getSettings().getValueById('ligerosmart_ws_name');
 
         const ligerosmartServerUserLogin: string =
             await read.getEnvironmentReader().getSettings().getValueById('ligerosmart_user_login');
@@ -255,7 +257,7 @@ export default class LigeroSmart {
             Password: ligerosmartServerUserPass || 'rocketchat',
         }
 
-        const apiUrlRocket = ligerosmartServerUrl + apiUriRocket;
+        const apiUrlRocket = ligerosmartServerUrl + apiUriRocket + ligerosmartServerWebserviceName + "/";
 
         const response = await http.post(apiUrlRocket,{
             content: JSON.stringify(data,null,2),

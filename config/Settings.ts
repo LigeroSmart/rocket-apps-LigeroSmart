@@ -3,6 +3,7 @@ import { ISetting, SettingType } from '@rocket.chat/apps-engine/definition/setti
 export enum AppSetting {
     LigeroSmartHi = 'ligerosmart_hi',
     LigeroSmartUrl = 'ligerosmart_url',
+    LigeroSmartWebserviceName = 'ligerosmart_ws_name',
     ligerosmartNewTicket = 'ligerosmart_new_ticket',
     ligerosmartUserLogin = 'ligerosmart_user_login',
     ligerosmartUserPassword = 'ligerosmart_user_password',
@@ -12,6 +13,7 @@ export enum AppSetting {
 export enum DefaultMessage {
     DEFAULT_LigeroSmartHi = 'Hi!',
     DEFAULT_LigeroSmartUrl = 'http://web',
+    DEFAULT_LigeroSmartWebserviceName = 'RocketChat',
     DEFAULT_LigeroSmartNewTicket = 'The ticket %s was created for this chat session.',
     DEFAULT_LigeroSmartUserLogin = 'rocketchat',
     DEFAULT_LigeroSmartUserPassword = 'rocketchat',
@@ -24,6 +26,14 @@ export const settings: Array<ISetting> = [
         type: SettingType.STRING,
         packageValue: DefaultMessage.DEFAULT_LigeroSmartUrl,
         i18nLabel: 'ligerosmart_url',
+        required: true,
+    },
+    {
+        id: AppSetting.LigeroSmartWebserviceName,
+        public: true,
+        type: SettingType.STRING,
+        packageValue: DefaultMessage.DEFAULT_LigeroSmartWebserviceName,
+        i18nLabel: 'ligerosmart_ws_name',
         required: true,
     },
     {
