@@ -9,13 +9,13 @@ import {
 } from '@rocket.chat/apps-engine/definition/accessors';
 import { App } from '@rocket.chat/apps-engine/definition/App';
 import { IMessage, IPostMessageSent } from '@rocket.chat/apps-engine/definition/messages';
-import { ILivechatRoom, IPostLivechatRoomClosed } from '@rocket.chat/apps-engine/definition/livechat';
+import { ILivechatRoom, ILivechatTransferEventContext, IPostLivechatRoomClosed, IPostLivechatRoomTransferred } from '@rocket.chat/apps-engine/definition/livechat';
 import { IAppInfo } from '@rocket.chat/apps-engine/definition/metadata';
 import { settings } from './config/Settings';
 import LigeroSmart from './src/LigeroSmart';
 import { RoomType } from '@rocket.chat/apps-engine/definition/rooms';
 import { IUser } from '@rocket.chat/apps-engine/definition/users';
-export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivechatRoomClosed  {
+export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivechatRoomClosed, IPostLivechatRoomTransferred  {
     constructor(info: IAppInfo, logger: ILogger, accessors: IAppAccessors) {
         super(info, logger, accessors);
     }
@@ -128,6 +128,33 @@ export class LigeroSmartApp extends App implements IPostMessageSent, IPostLivech
             return;
         }
         // this.getLogger().debug('c: 3');
+        const TicketID = await LigeroSmart.TicketCreateOrClose(
+            http,
+            read,
+            this.getLogger(),
+            data
+        )
+        // this.getLogger().debug('c: 4');
+        return;
+    }
+
+    public async executePostLivechatRoomTransferred(
+        context: ILivechatTransferEventContext,
+        read: IRead,
+        http: IHttp,
+        persis: IPersistence,
+        modify: IModify): Promise<void>{
+
+        const data = await LigeroSmart.ProcessData('LivechatRoomTransferred',
+                                                    read,
+                                                    persis,
+                                                    context.room as ILivechatRoom,
+                                                    undefined,
+                                                    this.getLogger());
+                                                    if(!data){
+                                                        return;
+                                                    }
+                                                    // this.getLogger().debug('c: 3');
         const TicketID = await LigeroSmart.TicketCreateOrClose(
             http,
             read,
